@@ -1,0 +1,1979 @@
+<!-- This is an HTML document -->
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- The title of the document shown in the browser tab -->
+    <title>AAIB Calculator</title>
+    <!-- Linking an external CSS file for styling -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto&display=swap"
+      rel="stylesheet"
+    />
+    <!-- <link rel="stylesheet" href="style.css"> -->
+    <!-- Including an external JavaScript file and deferring its execution until the document has loaded -->
+    <!-- <script src="script.js" defer></script> -->
+    <style>
+      /* Reset some default browser styles */
+      body,
+      h1,
+      h2,
+      h3,
+      p,
+      ul,
+      li {
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        font-family: "Roboto", sans-serif;
+        line-height: 1.6;
+        background-color: #f9f9f9;
+      }
+      .container {
+        max-width: 1450px;
+        margin: 0 auto;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        padding: 5px;
+        background-color: #ffffff;
+        /* White background */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+        border: 2px solid #0067ac;
+      }
+      h1 {
+        font-size: 2rem;
+        text-align: center;
+        margin-bottom: 20px;
+        color: #333;
+      }
+      .row-heading {
+        font-size: 1.3rem;
+        font-weight: bold;
+        color: #333;
+        padding: 10px 0;
+      }
+      .row {
+        border-bottom: 1px solid #ddd;
+        padding: 10px 0;
+        display: flex;
+        align-items: center;
+      }
+      .row:last-child {
+        border-bottom: none;
+      }
+      /*Styling for No Of TX*/
+      input.qty {
+        width: 30px;
+        padding: 8px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+      }
+      input[readonly] {
+        background-color: #f9f9f9;
+      }
+      #total-value {
+        font-size: 2rem;
+        margin-left: 0;
+      }
+      .text-right {
+        text-align: right;
+      }
+      /* Additional styles for a more visually appealing form */
+      .label {
+        font-weight: bold;
+      }
+      .row:nth-child(even) {
+        background-color: #f9f9f9;
+      }
+      /* Styling for the right-side display box */
+      .display-box {
+        padding: 20px;
+        background-color: #f9f9f9;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        margin-top: 20px;
+      }
+      .display-box h3 {
+        font-size: 1.5rem;
+        margin-bottom: 10px;
+        color: #333;
+      }
+      .display-box p {
+        margin-bottom: 5px;
+        color: #333;
+      }
+      table {
+        border-collapse: separate;
+        border-spacing: 0;
+        width: 100%;
+        border: 2px solid #0067ac;
+        /* Outside border color */
+        border-radius: 8px;
+        max-width: 1450px;
+        margin: 0 auto;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        padding: 5px;
+        background-color: #ffffff;
+        /* White background */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+        border: 2px solid #0067ac;
+      }
+      th,
+      td {
+        border: 0.1px solid #aaa;
+        padding: 8px;
+        text-align: left;
+        overflow: hidden;
+        white-space: nowrap;
+      }
+      /* Additional styles to make the table look more like the container */
+      table {
+        background-color: #ffffff;
+        /* White background */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        margin-top: 10px;
+        margin-bottom: 10px;
+      }
+      /*ReadOnly Value*/
+      input.readOnly {
+        width: 50px;
+        padding: 10px;
+        border: 1px solid #ddd;
+        text-align: right;
+        overflow: hidden;
+        border-radius: 8px;
+      }
+      /* Styling for input[type="text"] and input[type="number"] elements */
+      input[type="text"] {
+        padding: 8px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        color: #333;
+      }
+      #date-item-one,
+      #date-item-two,
+      #date-item-three,
+      #date-item-four,
+      #date-item-five,
+      #date-item-six,
+      #date-item-seven,
+      #date-item-eight,
+      #date-item-nine,
+      #date-item-ten,
+      #date-item-eleven,
+      #date-item-twelve {
+        width: 200px;
+      }
+      #price-item-one,
+      #price-item-two,
+      #price-item-three,
+      #price-item-four,
+      #price-item-five,
+      #price-item-six,
+      #price-item-seven,
+      #price-item-eight,
+      #price-item-nine,
+      #price-item-ten,
+      #price-item-eleven,
+      #price-item-twelve,
+      #our-item-one,
+      #our-item-two,
+      #our-item-three,
+      #our-item-four,
+      #our-item-five,
+      #our-item-six,
+      #our-item-seven,
+      #our-item-eight,
+      #our-item-nine,
+      #our-item-ten,
+      #our-item-eleven,
+      #our-item-twelve {
+        width: 75px;
+      }
+      input[type="text"]:focus {
+        outline: none;
+        border-color: #666;
+        box-shadow: 0 0 6px rgba(0, 0, 0, 0.1);
+      }
+      /* Styling for the selected items display box */
+      .selected-items-box {
+        background-color: #f9f9f9;
+        border: 2px solid #0067ac;
+        border-radius: 8px;
+        padding: 10px;
+        margin-top: 20px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        width: 700px;
+      }
+      .selected-items-box h3 {
+        margin-bottom: 10px;
+        color: #333;
+      }
+      #selected-items {
+        overflow: auto;
+        /* Enable scrolling if the content exceeds the height */
+      }
+      #instruction-items {
+        overflow: auto;
+        /* Enable scrolling if the content exceeds the height */
+      }
+      /* Add spacing between elements */
+      #claimant-name,
+      #invoice-number,
+      #clinic-name {
+        width: 92%;
+        border: 2px solid #0067ac;
+        border-radius: 8px;
+        padding: 8px;
+      }
+      #wad-select,
+      #instruction-select,
+      #dol {
+        margin-left: 10px;
+        margin-right: 10px;
+        border: 2px solid #0067ac;
+        border-radius: 8px;
+        padding: 8px;
+      }
+      #previous-Tx,
+      #previous-Supplies,
+      #previous-OtPsyc {
+        margin-left: 10px;
+        margin-right: 10px;
+        width: 30px;
+        border: 2px solid #0067ac;
+        border-radius: 8px;
+        padding: 8px;
+      }
+      /* CSS */
+      .button-17 {
+        align-items: center;
+        appearance: none;
+        background-color: #0067ac;
+        border-radius: 24px;
+        border-style: none;
+        box-shadow: rgba(0, 0, 0, 0.2) 0 3px 5px -1px,
+          rgba(0, 0, 0, 0.14) 0 6px 10px 0, rgba(0, 0, 0, 0.12) 0 1px 18px 0;
+        box-sizing: border-box;
+        color: #ffffff;
+        cursor: pointer;
+        display: inline-flex;
+        fill: currentcolor;
+        font-family: "Google Sans", Roboto, Arial, sans-serif;
+        font-size: 14px;
+        font-weight: 500;
+        height: 30px;
+        justify-content: center;
+        letter-spacing: 0.25px;
+        line-height: normal;
+        max-width: 100%;
+        overflow: visible;
+        margin-top: 10px;
+        padding: 2px 24px;
+        position: relative;
+        text-align: center;
+        text-transform: none;
+        transition: box-shadow 280ms cubic-bezier(0.4, 0, 0.2, 1),
+          opacity 15ms linear 30ms,
+          transform 270ms cubic-bezier(0, 0, 0.2, 1) 0ms;
+        user-select: none;
+        -webkit-user-select: none;
+        touch-action: manipulation;
+        width: auto;
+        will-change: transform, opacity;
+        z-index: 0;
+      }
+      .button-17:hover {
+        background: #f6f9fe;
+        color: #174ea6;
+      }
+      .button-17:active {
+        box-shadow: 0 4px 4px 0 rgb(60 64 67 / 30%),
+          0 8px 12px 6px rgb(60 64 67 / 15%);
+        outline: none;
+      }
+      .button-17:focus {
+        outline: none;
+        border: 2px solid #4285f4;
+      }
+      .button-17:not(:disabled) {
+        box-shadow: rgba(60, 64, 67, 0.3) 0 1px 3px 0,
+          rgba(60, 64, 67, 0.15) 0 4px 8px 3px;
+      }
+      .button-17:not(:disabled):hover {
+        box-shadow: rgba(60, 64, 67, 0.3) 0 2px 3px 0,
+          rgba(60, 64, 67, 0.15) 0 6px 10px 4px;
+      }
+      .button-17:not(:disabled):focus {
+        box-shadow: rgba(60, 64, 67, 0.3) 0 1px 3px 0,
+          rgba(60, 64, 67, 0.15) 0 4px 8px 3px;
+      }
+      .button-17:not(:disabled):active {
+        box-shadow: rgba(60, 64, 67, 0.3) 0 4px 4px 0,
+          rgba(60, 64, 67, 0.15) 0 8px 12px 6px;
+      }
+      .button-17:disabled {
+        box-shadow: rgba(60, 64, 67, 0.3) 0 1px 3px 0,
+          rgba(60, 64, 67, 0.15) 0 4px 8px 3px;
+      }
+      /* Responsive table cell styles */
+      @media only screen and (max-width: 600px) {
+        table,
+        th,
+        td {
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          max-width: 100px;
+          /* Adjust the maximum width as needed */
+        }
+        .row-heading,
+        .row,
+        .row:last-child {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Creating a table to display transaction information -->
+    <table>
+      <!-- Table header row with column headers -->
+      <tr>
+        <th>Item</th>
+        <th>No of TX</th>
+        <th>Date of TX</th>
+        <th>Price</th>
+        <th>Our Portion</th>
+        <th colspan="2"></th>
+      </tr>
+      <!-- Table row for transaction details -->
+      <tr>
+        <td>
+          <input type="text" name="item-one" id="item-one" />
+        </td>
+        <td>
+          <input
+            type="number"
+            value="0"
+            oninput="validity.valid||(value='');"
+            class="qty"
+            min="0"
+            id="qty-item-one"
+          />
+        </td>
+        <td>
+          <input type="text" id="date-item-one" name="date-item-one" />
+        </td>
+        <td>
+          <input type="text" value="0" id="price-item-one" />
+        </td>
+        <td>
+          <input type="text" value="0" id="our-item-one" />
+        </td>
+        <td>
+          <label for="claimant-name" class="form-label">Claimant:</label>
+        </td>
+        <td>
+          <input
+            type="text"
+            id="claimant-name"
+            name="claimant-name"
+            class="form-control"
+          />
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <input type="text" name="item-two" id="item-two" />
+        </td>
+        <td>
+          <input
+            type="number"
+            value="0"
+            oninput="validity.valid||(value='');"
+            class="qty"
+            min="0"
+            id="qty-item-two"
+          />
+        </td>
+        <td>
+          <input type="text" id="date-item-two" name="date-item-two" />
+        </td>
+        <td>
+          <input type="text" value="0" id="price-item-two" />
+        </td>
+        <td>
+          <input type="text" value="0" id="our-item-two" />
+        </td>
+        <td>
+          <label for="invoice-number" class="form-label">Invoice Number:</label>
+        </td>
+        <td>
+          <input
+            type="text"
+            id="invoice-number"
+            name="invoice-number"
+            class="form-control"
+          />
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <input type="text" name="item-three" id="item-three" />
+        </td>
+        <td>
+          <input
+            type="number"
+            value="0"
+            oninput="validity.valid||(value='');"
+            class="qty"
+            min="0"
+            id="qty-item-three"
+          />
+        </td>
+        <td>
+          <input type="text" id="date-item-three" name="date-item-three" />
+        </td>
+        <td>
+          <input type="text" value="0" id="price-item-three" />
+        </td>
+        <td>
+          <input type="text" value="0" id="our-item-three" />
+        </td>
+        <td>
+          <label for="clinic-name" class="form-label">Clinic Name:</label>
+        </td>
+        <td>
+          <input
+            type="text"
+            id="clinic-name"
+            name="clinic-name"
+            class="form-control"
+          />
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <input type="text" name="item-four" id="item-four" />
+        </td>
+        <td>
+          <input
+            type="number"
+            value="0"
+            oninput="validity.valid||(value='');"
+            class="qty"
+            min="0"
+            id="qty-item-four"
+          />
+        </td>
+        <td>
+          <input type="text" id="date-item-four" name="date-item-four" />
+        </td>
+        <td>
+          <input type="text" value="0" id="price-item-four" />
+        </td>
+        <td>
+          <input type="text" value="0" id="our-item-four" />
+        </td>
+        <td rowspan="10" colspan="2" style="vertical-align: top">
+          <div>
+            Note:
+            <button id="copy-btn" class="button-17" role="button">Copy</button>
+          </div>
+          <div class="selected-items-box">
+            <div id="selected-items"></div>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <input type="text" name="item-five" id="item-five" />
+        </td>
+        <td>
+          <input
+            type="number"
+            value="0"
+            oninput="validity.valid||(value='');"
+            class="qty"
+            min="0"
+            id="qty-item-five"
+          />
+        </td>
+        <td>
+          <input type="text" id="date-item-five" name="date-item-five" />
+        </td>
+        <td>
+          <input type="text" value="0" id="price-item-five" />
+        </td>
+        <td>
+          <input type="text" value="0" id="our-item-five" />
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <input type="text" name="item-six" id="item-six" />
+        </td>
+        <td>
+          <input
+            type="number"
+            value="0"
+            oninput="validity.valid||(value='');"
+            class="qty"
+            min="0"
+            id="qty-item-six"
+          />
+        </td>
+        <td>
+          <input type="text" id="date-item-six" name="date-item-six" />
+        </td>
+        <td>
+          <input type="text" value="0" id="price-item-six" />
+        </td>
+        <td>
+          <input type="text" value="0" id="our-item-six" />
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <input type="text" name="item-seven" id="item-seven" />
+        </td>
+        <td>
+          <input
+            type="number"
+            value="0"
+            oninput="validity.valid||(value='');"
+            class="qty"
+            min="0"
+            id="qty-item-seven"
+          />
+        </td>
+        <td>
+          <input type="text" id="date-item-seven" name="date-item-seven" />
+        </td>
+        <td>
+          <input type="text" value="0" id="price-item-seven" />
+        </td>
+        <td>
+          <input type="text" value="0" id="our-item-seven" />
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <input type="text" name="item-eight" id="item-eight" />
+        </td>
+        <td>
+          <input
+            type="number"
+            value="0"
+            oninput="validity.valid||(value='');"
+            class="qty"
+            min="0"
+            id="qty-item-eight"
+          />
+        </td>
+        <td>
+          <input type="text" id="date-item-eight" name="date-item-eight" />
+        </td>
+        <td>
+          <input type="text" value="0" id="price-item-eight" />
+        </td>
+        <td>
+          <input type="text" value="0" id="our-item-eight" />
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <input type="text" name="item-nine" id="item-nine" />
+        </td>
+        <td>
+          <input
+            type="number"
+            value="0"
+            oninput="validity.valid||(value='');"
+            class="qty"
+            min="0"
+            id="qty-item-nine"
+          />
+        </td>
+        <td>
+          <input type="text" id="date-item-nine" name="date-item-nine" />
+        </td>
+        <td>
+          <input type="text" value="0" id="price-item-nine" />
+        </td>
+        <td>
+          <input type="text" value="0" id="our-item-nine" />
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <input type="text" name="item-ten" id="item-ten" />
+        </td>
+        <td>
+          <input
+            type="number"
+            value="0"
+            oninput="validity.valid||(value='');"
+            class="qty"
+            min="0"
+            id="qty-item-ten"
+          />
+        </td>
+        <td>
+          <input type="text" id="date-item-ten" name="date-item-ten" />
+        </td>
+        <td>
+          <input type="text" value="0" id="price-item-ten" />
+        </td>
+        <td>
+          <input type="text" value="0" id="our-item-ten" />
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <input type="text" name="item-eleven" id="item-eleven" />
+        </td>
+        <td>
+          <input
+            type="number"
+            value="0"
+            oninput="validity.valid||(value='');"
+            class="qty"
+            min="0"
+            id="qty-item-eleven"
+          />
+        </td>
+        <td>
+          <input type="text" id="date-item-eleven" name="date-item-eleven" />
+        </td>
+        <td>
+          <input type="text" value="0" id="price-item-eleven" />
+        </td>
+        <td>
+          <input type="text" value="0" id="our-item-eleven" />
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <input type="text" name="item-twelve" id="item-twelve" />
+        </td>
+        <td>
+          <input
+            type="number"
+            value="0"
+            oninput="validity.valid||(value='');"
+            class="qty"
+            min="0"
+            id="qty-item-twelve"
+          />
+        </td>
+        <td>
+          <input type="text" id="date-item-twelve" name="date-item-twelve" />
+        </td>
+        <td>
+          <input type="text" value="0" id="price-item-twelve" />
+        </td>
+        <td>
+          <input type="text" value="0" id="our-item-twelve" />
+        </td>
+      </tr>
+      <!-- Row for displaying the total calculation -->
+      <tr>
+        <td>
+          <strong>Total</strong>
+        </td>
+        <td>
+          <input
+            type="number"
+            class="qty"
+            readonly
+            value="0"
+            class="qty"
+            id="total-quantity"
+          />
+        </td>
+        <td colspan="2"></td>
+        <td>
+          <span id="total-value"></span>
+        </td>
+      </tr>
+    </table>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const clientName = document.getElementById("claimant-name");
+        const clientClinic = document.getElementById("clinic-name");
+        const invNum = document.getElementById("invoice-number");
+
+        const itemOne = document.getElementById("item-one");
+        const qtyItemOne = document.getElementById("qty-item-one");
+        const priceItemOne = document.getElementById("price-item-one");
+        const dateFieldItemOne = document.getElementById("date-item-one");
+        const ourItemOne = document.getElementById("our-item-one");
+
+        const itemTwo = document.getElementById("item-two");
+        const qtyItemTwo = document.getElementById("qty-item-two");
+        const priceItemTwo = document.getElementById("price-item-two");
+        const dateFieldItemTwo = document.getElementById("date-item-two");
+        const ourItemTwo = document.getElementById("our-item-two");
+
+        const itemThree = document.getElementById("item-three");
+        const qtyItemThree = document.getElementById("qty-item-three");
+        const priceItemThree = document.getElementById("price-item-three");
+        const dateFieldItemThree = document.getElementById("date-item-three");
+        const ourItemThree = document.getElementById("our-item-three");
+
+        const itemFour = document.getElementById("item-four");
+        const qtyItemFour = document.getElementById("qty-item-four");
+        const priceItemFour = document.getElementById("price-item-four");
+        const dateFieldItemFour = document.getElementById("date-item-four");
+        const ourItemFour = document.getElementById("our-item-four");
+
+        const itemFive = document.getElementById("item-five");
+        const qtyItemFive = document.getElementById("qty-item-five");
+        const priceItemFive = document.getElementById("price-item-five");
+        const dateFieldItemFive = document.getElementById("date-item-five");
+        const ourItemFive = document.getElementById("our-item-five");
+
+        const itemSix = document.getElementById("item-six");
+        const qtyItemSix = document.getElementById("qty-item-six");
+        const priceItemSix = document.getElementById("price-item-six");
+        const dateFieldItemSix = document.getElementById("date-item-six");
+        const ourItemSix = document.getElementById("our-item-six");
+
+        const itemSeven = document.getElementById("item-seven");
+        const qtyItemSeven = document.getElementById("qty-item-seven");
+        const priceItemSeven = document.getElementById("price-item-seven");
+        const dateFieldItemSeven = document.getElementById("date-item-seven");
+        const ourItemSeven = document.getElementById("our-item-seven");
+
+        const itemEight = document.getElementById("item-eight");
+        const qtyItemEight = document.getElementById("qty-item-eight");
+        const priceItemEight = document.getElementById("price-item-eight");
+        const dateFieldItemEight = document.getElementById("date-item-eight");
+        const ourItemEight = document.getElementById("our-item-eight");
+
+        const itemNine = document.getElementById("item-nine");
+        const qtyItemNine = document.getElementById("qty-item-nine");
+        const priceItemNine = document.getElementById("price-item-nine");
+        const dateFieldItemNine = document.getElementById("date-item-nine");
+        const ourItemNine = document.getElementById("our-item-nine");
+
+        const itemTen = document.getElementById("item-ten");
+        const qtyItemTen = document.getElementById("qty-item-ten");
+        const priceItemTen = document.getElementById("price-item-ten");
+        const dateFieldItemTen = document.getElementById("date-item-ten");
+        const ourItemTen = document.getElementById("our-item-ten");
+
+        const itemEleven = document.getElementById("item-eleven");
+        const qtyItemEleven = document.getElementById("qty-item-eleven");
+        const priceItemEleven = document.getElementById("price-item-eleven");
+        const dateFieldItemEleven = document.getElementById("date-item-eleven");
+        const ourItemEleven = document.getElementById("our-item-eleven");
+
+        const itemTwelve = document.getElementById("item-twelve");
+        const qtyItemTwelve = document.getElementById("qty-item-twelve");
+        const priceItemTwelve = document.getElementById("price-item-twelve");
+        const dateFieldItemTwelve = document.getElementById("date-item-twelve");
+        const ourItemTwelve = document.getElementById("our-item-twelve");
+
+        const totalValueElement = document.getElementById("total-value");
+        const totalQuantityElement = document.getElementById("total-quantity");
+        const selectedItemsContainer =
+          document.getElementById("selected-items");
+        const instructionItemsContainer =
+          document.getElementById("instruction-items");
+
+        // Find the copy button element
+        const copyButton = document.getElementById("copy-btn");
+
+        let selectedItemOne = 0;
+        let selectedItemTwo = 0;
+        let selectedItemThree = 0;
+        let selectedItemFour = 0;
+        let selectedItemFive = 0;
+        let selectedItemSix = 0;
+        let selectedItemSeven = 0;
+        let selectedItemEight = 0;
+        let selectedItemNine = 0;
+        let selectedItemTen = 0;
+        let selectedItemEleven = 0;
+        let selectedItemTwelve = 0;
+
+        // New variable to keep track of whether both qty and price are entered for "MT Any1"
+        let itemOnePrice = 0;
+        let itemTwoPrice = 0;
+        let itemThreePrice = 0;
+        let itemFourPrice = 0;
+        let itemFivePrice = 0;
+        let itemSixPrice = 0;
+        let itemSevenPrice = 0;
+        let itemEightPrice = 0;
+        let itemNinePrice = 0;
+        let itemTenPrice = 0;
+        let itemElevenPrice = 0;
+        let itemTwelvePrice = 0;
+
+        let itemOneTotal = 0;
+        let itemTwoTotal = 0;
+        let itemThreeTotal = 0;
+        let itemFourTotal = 0;
+        let itemFiveTotal = 0;
+        let itemSixTotal = 0;
+        let itemSevenTotal = 0;
+        let itemEightTotal = 0;
+        let itemNineTotal = 0;
+        let itemTenTotal = 0;
+        let itemElevenTotal = 0;
+        let itemTwelveTotal = 0;
+
+        let itemOneFinalPrice = 0;
+        let itemTwoFinalPrice = 0;
+        let itemThreeFinalPrice = 0;
+        let itemFourFinalPrice = 0;
+        let itemFiveFinalPrice = 0;
+        let itemSixFinalPrice = 0;
+        let itemSevenFinalPrice = 0;
+        let itemEightFinalPrice = 0;
+        let itemNineFinalPrice = 0;
+        let itemTenFinalPrice = 0;
+        let itemElevenFinalPrice = 0;
+        let itemTwelveFinalPrice = 0;
+
+        let isGSTIncluded = false; // Assume GST is included by default
+        let isEHCIncluded = false; // Assume EHC is not included by default
+
+        // Function to calculate the total price and quantity
+        function calculateTotal() {
+          const anyItemSelected =
+            parseFloat(qtyItemOne.value) > 0 ||
+            parseFloat(qtyItemTwo.value) > 0 ||
+            parseFloat(qtyItemThree.value) > 0 ||
+            parseFloat(qtyItemFour.value) > 0 ||
+            parseFloat(qtyItemFive.value) > 0 ||
+            parseFloat(qtyItemSix.value) > 0 ||
+            parseFloat(qtyItemSeven.value) > 0 ||
+            parseFloat(qtyItemEight.value) > 0 ||
+            parseFloat(qtyItemNine.value) > 0 ||
+            parseFloat(qtyItemTen.value) > 0 ||
+            parseFloat(qtyItemEleven.value) > 0 ||
+            parseFloat(qtyItemTwelve.value) > 0;
+
+          const itemQuantities = [
+            parseFloat(qtyItemOne.value),
+            parseFloat(qtyItemTwo.value),
+            parseFloat(qtyItemThree.value),
+            parseFloat(qtyItemFour.value),
+            parseFloat(qtyItemFive.value),
+            parseFloat(qtyItemSix.value),
+            parseFloat(qtyItemSeven.value),
+            parseFloat(qtyItemEight.value),
+            parseFloat(qtyItemNine.value),
+            parseFloat(qtyItemTen.value),
+            parseFloat(qtyItemEleven.value),
+            parseFloat(qtyItemTwelve.value),
+          ];
+
+          const itemPrices = [
+            parseFloat(itemOneTotal),
+            parseFloat(itemTwoTotal),
+            parseFloat(itemThreeTotal),
+            parseFloat(itemFourTotal),
+            parseFloat(itemFiveTotal),
+            parseFloat(itemSixTotal),
+            parseFloat(itemSevenTotal),
+            parseFloat(itemEightTotal),
+            parseFloat(itemNineTotal),
+            parseFloat(itemTenTotal),
+            parseFloat(itemElevenTotal),
+            parseFloat(itemTwelveTotal),
+          ];
+
+          const finalPrices = [
+            parseFloat(itemOneFinalPrice),
+            parseFloat(itemTwoFinalPrice),
+            parseFloat(itemThreeFinalPrice),
+            parseFloat(itemFourFinalPrice),
+            parseFloat(itemFiveFinalPrice),
+            parseFloat(itemSixFinalPrice),
+            parseFloat(itemSevenFinalPrice),
+            parseFloat(itemEightFinalPrice),
+            parseFloat(itemNineFinalPrice),
+            parseFloat(itemTenFinalPrice),
+            parseFloat(itemElevenFinalPrice),
+            parseFloat(itemTwelveFinalPrice),
+          ];
+
+          const totalQty = itemQuantities.reduce((acc, qty) => acc + qty, 0);
+          const totalPrice = finalPrices.reduce((acc, price) => acc + price, 0);
+
+          // Hide "Total Quantity" if totalQty is 0
+
+          if (anyItemSelected > 0) {
+            const totalQuantityDisplay = document.createElement("span");
+            totalQuantityDisplay.innerText = ` ======================================================== \n `;
+            selectedItemsContainer.appendChild(totalQuantityDisplay);
+          }
+
+          totalValueElement.innerText = totalPrice.toFixed(2);
+          totalQuantityElement.value = totalQty;
+        }
+
+        // Function to update the displayed item price and quantity
+        function updateDisplay(item, qtyInput, priceInput) {
+          const qtyValue = parseFloat(qtyInput.value);
+          const priceValue = parseFloat(priceInput.value);
+
+          if (qtyValue > 0) {
+            item.style.display = "block";
+            item.innerHTML = `${qtyValue} ${
+              qtyValue === 1 ? "item" : "items"
+            } @ $${priceValue.toFixed(2)}`;
+          } else {
+            item.style.display = "none";
+          }
+
+          calculateTotal();
+          displaySelectedItems();
+        }
+
+        // Function to display selected items
+        function displaySelectedItems() {
+          selectedItemsContainer.innerHTML = "";
+          // Calculate total value
+          const totalValue = parseFloat(totalValueElement.innerText);
+          const totalValueDisplay = document.createElement("span");
+          const clientName = document.getElementById("claimant-name").value;
+          const invNum = document.getElementById("invoice-number").value;
+          const clientClinic = document.getElementById("clinic-name").value;
+          totalValueDisplay.innerText = `Claimant: ${clientName} \n Paid Inv. ${invNum} to ${clientClinic} for $${totalValue.toFixed(
+            2
+          )}\n\n`;
+          selectedItemsContainer.appendChild(totalValueDisplay);
+
+          /* Initialize total price variable outside the function */
+          let totalABPrice = 0;
+
+          /* Fixed Value Items Display */
+          function addItemToDisplay(
+            itemName,
+            qtyValue,
+            priceValue,
+            dateValue,
+            gstCheck,
+            ehcCheck,
+            ehcAmount,
+            ourAmount
+          ) {
+            if (gstCheck) {
+              if (ehcCheck != priceValue) {
+                if (priceValue == 0) {
+                  const itemDisplay = document.createElement("span");
+                  itemDisplay.innerText = `${qtyValue} ${itemName} $${
+                    Math.round((ehcCheck + Number.EPSILON) * 100) / 100
+                  } Each (EHC Paid $${(
+                    ehcCheck.toFixed(2) - ehcAmount.toFixed(2)
+                  ).toFixed(2)}, Our Portion $${ehcAmount.toFixed(
+                    2
+                  )}) (GST Incl.) - Date: ${dateValue} \n`;
+                  selectedItemsContainer.appendChild(itemDisplay);
+                } else {
+                  const itemDisplay = document.createElement("span");
+                  itemDisplay.innerText = `${qtyValue} ${itemName} $${
+                    Math.round((priceValue + Number.EPSILON) * 100) / 100
+                  } Each (EHC Paid $${(
+                    priceValue.toFixed(2) - ehcCheck.toFixed(2)
+                  ).toFixed(2)}, Our Portion $${ehcCheck.toFixed(
+                    2
+                  )}) (GST Incl.) - Date: ${dateValue} \n`;
+                  selectedItemsContainer.appendChild(itemDisplay);
+                }
+              } else {
+                const itemDisplay = document.createElement("span");
+                itemDisplay.innerText = `${qtyValue} ${itemName} $${
+                  Math.round((priceValue + Number.EPSILON) * 100) / 100
+                } Each (GST Incl.) - Date: ${dateValue}\n`;
+                selectedItemsContainer.appendChild(itemDisplay);
+              }
+            } else {
+              if (ehcCheck != priceValue) {
+                if (priceValue == 0) {
+                  const itemDisplay = document.createElement("span");
+                  itemDisplay.innerText = `${qtyValue} ${itemName} $${
+                    Math.round((ehcCheck + Number.EPSILON) * 100) / 100
+                  } Each - Date: ${dateValue}\n`;
+                  selectedItemsContainer.appendChild(itemDisplay);
+                } else {
+                  const itemDisplay = document.createElement("span");
+                  itemDisplay.innerText = `${qtyValue} ${itemName} $${
+                    Math.round((priceValue + Number.EPSILON) * 100) / 100
+                  } Each (EHC Paid $${(
+                    priceValue.toFixed(2) - ehcCheck.toFixed(2)
+                  ).toFixed(2)}, Our Portion $${ehcCheck.toFixed(
+                    2
+                  )}) - Date: ${dateValue}\n`;
+                  selectedItemsContainer.appendChild(itemDisplay);
+                }
+              } else {
+                const itemDisplay = document.createElement("span");
+                itemDisplay.innerText = `${qtyValue} ${itemName} $${
+                  Math.round((priceValue + Number.EPSILON) * 100) / 100
+                } Each - Date: ${dateValue}\n`;
+                selectedItemsContainer.appendChild(itemDisplay);
+              }
+            }
+          }
+
+          const qtyItemOneValue = parseFloat(qtyItemOne.value);
+          const priceItemOneValue = parseFloat(priceItemOne.value);
+          const dateItemOneValue =
+            document.getElementById("date-item-one").value;
+          if (qtyItemOneValue > 0) {
+            addItemToDisplay(
+              itemOne.value,
+              qtyItemOneValue,
+              selectedItemOne,
+              dateItemOneValue,
+              priceItemOne.value.trim().toLowerCase().endsWith("g"),
+              itemOnePrice
+            );
+          }
+
+          const qtyItemTwoValue = parseFloat(qtyItemTwo.value);
+          const priceItemTwoValue = parseFloat(priceItemTwo.value);
+          const dateItemTwoValue =
+            document.getElementById("date-item-two").value;
+          if (qtyItemTwoValue > 0) {
+            addItemToDisplay(
+              itemTwo.value,
+              qtyItemTwoValue,
+              selectedItemTwo,
+              dateItemTwoValue,
+              priceItemTwo.value.trim().toLowerCase().endsWith("g"),
+              itemTwoPrice
+            );
+          }
+
+          const qtyItemThreeValue = parseFloat(qtyItemThree.value);
+          const priceItemThreeValue = parseFloat(priceItemThree.value);
+          const dateItemThreeValue =
+            document.getElementById("date-item-three").value;
+          if (qtyItemThreeValue > 0) {
+            addItemToDisplay(
+              itemThree.value,
+              qtyItemThreeValue,
+              selectedItemThree,
+              dateItemThreeValue,
+              priceItemThree.value.trim().toLowerCase().endsWith("g"),
+              itemThreePrice
+            );
+          }
+
+          const qtyItemFourValue = parseFloat(qtyItemFour.value);
+          const priceItemFourValue = parseFloat(priceItemFour.value);
+          const dateItemFourValue =
+            document.getElementById("date-item-four").value;
+          if (qtyItemFourValue > 0) {
+            addItemToDisplay(
+              itemFour.value,
+              qtyItemFourValue,
+              selectedItemFour,
+              dateItemFourValue,
+              priceItemFour.value.trim().toLowerCase().endsWith("g"),
+              itemFourPrice
+            );
+          }
+
+          const qtyItemFiveValue = parseFloat(qtyItemFive.value);
+          const priceItemFiveValue = parseFloat(priceItemFive.value);
+          const dateItemFiveValue =
+            document.getElementById("date-item-five").value;
+          if (qtyItemFiveValue > 0) {
+            addItemToDisplay(
+              itemFive.value,
+              qtyItemFiveValue,
+              selectedItemFive,
+              dateItemFiveValue,
+              priceItemFive.value.trim().toLowerCase().endsWith("g"),
+              itemFivePrice
+            );
+          }
+
+          const qtyItemSixValue = parseFloat(qtyItemSix.value);
+          const priceItemSixValue = parseFloat(priceItemSix.value);
+          const dateItemSixValue =
+            document.getElementById("date-item-six").value;
+          if (qtyItemSixValue > 0) {
+            addItemToDisplay(
+              itemSix.value,
+              qtyItemSixValue,
+              selectedItemSix,
+              dateItemSixValue,
+              priceItemSix.value.trim().toLowerCase().endsWith("g"),
+              itemSixPrice
+            );
+          }
+
+          const qtyItemSevenValue = parseFloat(qtyItemSeven.value);
+          const priceItemSevenValue = parseFloat(priceItemSeven.value);
+          const dateItemSevenValue =
+            document.getElementById("date-item-seven").value;
+          if (qtyItemSevenValue > 0) {
+            addItemToDisplay(
+              itemSeven.value,
+              qtyItemSevenValue,
+              selectedItemSeven,
+              dateItemSevenValue,
+              priceItemSeven.value.trim().toLowerCase().endsWith("g"),
+              itemSevenPrice
+            );
+          }
+
+          const qtyItemEightValue = parseFloat(qtyItemEight.value);
+          const priceItemEightValue = parseFloat(priceItemEight.value);
+          const dateItemEightValue =
+            document.getElementById("date-item-eight").value;
+          if (qtyItemEightValue > 0) {
+            addItemToDisplay(
+              itemEight.value,
+              qtyItemEightValue,
+              selectedItemEight,
+              dateItemEightValue,
+              priceItemEight.value.trim().toLowerCase().endsWith("g"),
+              itemEightPrice
+            );
+          }
+
+          const qtyItemNineValue = parseFloat(qtyItemNine.value);
+
+          const priceItemNineValue = parseFloat(priceItemNine.value);
+          const dateItemNineValue =
+            document.getElementById("date-item-nine").value;
+          if (qtyItemNineValue > 0) {
+            addItemToDisplay(
+              itemNine.value,
+              qtyItemNineValue,
+              selectedItemNine,
+              dateItemNineValue,
+              priceItemNine.value.trim().toLowerCase().endsWith("g"),
+              itemNinePrice
+            );
+          }
+
+          const qtyItemTenValue = parseFloat(qtyItemTen.value);
+          const priceItemTenValue = parseFloat(priceItemTen.value);
+          const dateItemTenValue =
+            document.getElementById("date-item-ten").value;
+          if (qtyItemTenValue > 0) {
+            addItemToDisplay(
+              itemTen.value,
+              qtyItemTenValue,
+              selectedItemTen,
+              dateItemTenValue,
+              priceItemTen.value.trim().toLowerCase().endsWith("g"),
+              itemTenPrice
+            );
+          }
+
+          const qtyItemElevenValue = parseFloat(qtyItemEleven.value);
+          const priceItemElevenValue = parseFloat(priceItemEleven.value);
+          const dateItemElevenValue =
+            document.getElementById("date-item-eleven").value;
+          if (qtyItemElevenValue > 0) {
+            addItemToDisplay(
+              itemEleven.value,
+              qtyItemElevenValue,
+              selectedItemEleven,
+              dateItemElevenValue,
+              priceItemEleven.value.trim().toLowerCase().endsWith("g"),
+              itemElevenPrice
+            );
+          }
+
+          const qtyItemTwelveValue = parseFloat(qtyItemTwelve.value);
+          const priceItemTwelveValue = parseFloat(priceItemTwelve.value);
+          const dateItemTwelveValue =
+            document.getElementById("date-item-twelve").value;
+
+          if (qtyItemTwelveValue > 0) {
+            addItemToDisplay(
+              itemTwelve.value,
+              qtyItemTwelveValue,
+              selectedItemTwelve,
+              dateItemTwelveValue,
+              priceItemTwelve.value.trim().toLowerCase().endsWith("g"),
+              itemTwelvePrice
+            );
+          }
+
+          // Call calculateTotal to update the total price in the display box
+          calculateTotal();
+        }
+
+        clientName.addEventListener("input", function () {
+          displaySelectedItems();
+        });
+        clientClinic.addEventListener("input", function () {
+          displaySelectedItems();
+        });
+        invNum.addEventListener("input", function () {
+          displaySelectedItems();
+        });
+
+        // Event listeners to update prices and quantities when quantity inputs change
+
+        itemOne.addEventListener("input", function () {
+          displaySelectedItems();
+        });
+
+        qtyItemOne.addEventListener("input", function () {
+          updateItemOneTotal();
+        });
+
+        dateFieldItemOne.addEventListener("input", function () {
+          displaySelectedItems();
+        });
+
+        priceItemOne.addEventListener("input", function () {
+          updateItemOneTotal();
+          displaySelectedItems();
+        });
+
+        ourItemOne.addEventListener("input", function () {
+          updateItemOneTotal();
+          displaySelectedItems();
+        });
+
+        function updateItemOneTotal() {
+          let qtyValue = parseFloat(qtyItemOne.value);
+          let priceValue = parseFloat(priceItemOne.value);
+          let ourValue = parseFloat(ourItemOne.value);
+
+          // Check if price is inclusive of GST
+          if (priceItemOne.value.trim().toLowerCase().endsWith("g")) {
+            priceValue *= 1.05; // Assuming 5% GST
+            priceValue = Math.round((priceValue + Number.EPSILON) * 100) / 100;
+
+            ourValue *= 1.05; // Assuming 5% GST
+            ourValue = Math.round((ourValue + Number.EPSILON) * 100) / 100;
+          }
+
+          // Calculate final price based on provided values
+          if (
+            ourValue !== undefined &&
+            ourValue !== null &&
+            !isNaN(ourValue) &&
+            ourValue !== 0
+          ) {
+            // If our portion is provided and not zero
+            selectedItemOne = priceValue; // Update displayed price
+            itemOneFinalPrice = ourValue * qtyValue; // Final price based on our portion
+            itemOnePrice = ourValue; // Our portion
+          } else {
+            // If our portion is zero or not provided
+            selectedItemOne = priceValue; // Update displayed price
+            itemOneFinalPrice = qtyValue * priceValue; // Final price based on full price
+            itemOnePrice = priceValue; // Full price
+          }
+
+          calculateTotal();
+          displaySelectedItems();
+        }
+
+        itemTwo.addEventListener("input", function () {
+          displaySelectedItems();
+        });
+
+        qtyItemTwo.addEventListener("input", function () {
+          updateItemTwoTotal();
+        });
+
+        dateFieldItemTwo.addEventListener("input", function () {
+          displaySelectedItems();
+        });
+
+        priceItemTwo.addEventListener("input", function () {
+          updateItemTwoTotal();
+          displaySelectedItems();
+        });
+
+        ourItemTwo.addEventListener("input", function () {
+          updateItemTwoTotal();
+          displaySelectedItems();
+        });
+
+        function updateItemTwoTotal() {
+          let qtyValue = parseFloat(qtyItemTwo.value);
+          let priceValue = parseFloat(priceItemTwo.value);
+          let ourValue = parseFloat(ourItemTwo.value);
+
+          // Check if price is inclusive of GST
+          if (priceItemTwo.value.trim().toLowerCase().endsWith("g")) {
+            priceValue *= 1.05; // Assuming 5% GST
+            priceValue = Math.round((priceValue + Number.EPSILON) * 100) / 100;
+
+            ourValue *= 1.05; // Assuming 5% GST
+            ourValue = Math.round((ourValue + Number.EPSILON) * 100) / 100;
+          }
+
+          // Calculate final price based on provided values
+          if (
+            ourValue !== undefined &&
+            ourValue !== null &&
+            !isNaN(ourValue) &&
+            ourValue !== 0
+          ) {
+            // If our portion is provided and not zero
+            selectedItemTwo = priceValue; // Update displayed price
+            itemTwoFinalPrice = ourValue * qtyValue; // Final price based on our portion
+            itemTwoPrice = ourValue; // Our portion
+          } else {
+            // If our portion is zero or not provided
+            selectedItemTwo = priceValue; // Update displayed price
+            itemTwoFinalPrice = qtyValue * priceValue; // Final price based on full price
+            itemTwoPrice = priceValue; // Full price
+            ehcAmount = 0;
+            ehcCheck = 0;
+          }
+
+          calculateTotal();
+          displaySelectedItems();
+        }
+
+        itemThree.addEventListener("input", function () {
+          displaySelectedItems();
+        });
+
+        qtyItemThree.addEventListener("input", function () {
+          updateItemThreeTotal();
+        });
+
+        dateFieldItemThree.addEventListener("input", function () {
+          displaySelectedItems();
+        });
+
+        priceItemThree.addEventListener("input", function () {
+          updateItemThreeTotal();
+          displaySelectedItems();
+        });
+
+        ourItemThree.addEventListener("input", function () {
+          updateItemThreeTotal();
+          displaySelectedItems();
+        });
+
+        function updateItemThreeTotal() {
+          let qtyValue = parseFloat(qtyItemThree.value);
+          let priceValue = parseFloat(priceItemThree.value);
+          let ourValue = parseFloat(ourItemThree.value);
+
+          // Check if price is inclusive of GST
+          if (priceItemThree.value.trim().toLowerCase().endsWith("g")) {
+            priceValue *= 1.05; // Assuming 5% GST
+            priceValue = Math.round((priceValue + Number.EPSILON) * 100) / 100;
+
+            ourValue *= 1.05; // Assuming 5% GST
+            ourValue = Math.round((ourValue + Number.EPSILON) * 100) / 100;
+          }
+
+          // Calculate final price based on provided values
+          if (
+            ourValue !== undefined &&
+            ourValue !== null &&
+            !isNaN(ourValue) &&
+            ourValue !== 0
+          ) {
+            // If our portion is provided and not zero
+            selectedItemThree = priceValue; // Update displayed price
+            itemThreeFinalPrice = ourValue * qtyValue; // Final price based on our portion
+            itemThreePrice = ourValue; // Our portion
+          } else {
+            // If our portion is zero or not provided
+            selectedItemThree = priceValue; // Update displayed price
+            itemThreeFinalPrice = qtyValue * priceValue; // Final price based on full price
+            itemThreePrice = priceValue; // Full price
+            ehcAmount = 0;
+            ehcCheck = 0;
+          }
+
+          calculateTotal();
+          displaySelectedItems();
+        }
+
+        itemFour.addEventListener("input", function () {
+          displaySelectedItems();
+        });
+
+        qtyItemFour.addEventListener("input", function () {
+          updateItemFourTotal();
+        });
+
+        dateFieldItemFour.addEventListener("input", function () {
+          displaySelectedItems();
+        });
+
+        priceItemFour.addEventListener("input", function () {
+          updateItemFourTotal();
+          displaySelectedItems();
+        });
+
+        ourItemFour.addEventListener("input", function () {
+          updateItemFourTotal();
+          displaySelectedItems();
+        });
+
+        function updateItemFourTotal() {
+          let qtyValue = parseFloat(qtyItemFour.value);
+          let priceValue = parseFloat(priceItemFour.value);
+          let ourValue = parseFloat(ourItemFour.value);
+
+          // Check if price is inclusive of GST
+          if (priceItemFour.value.trim().toLowerCase().endsWith("g")) {
+            priceValue *= 1.05; // Assuming 5% GST
+            priceValue = Math.round((priceValue + Number.EPSILON) * 100) / 100;
+
+            ourValue *= 1.05; // Assuming 5% GST
+            ourValue = Math.round((ourValue + Number.EPSILON) * 100) / 100;
+          }
+
+          // Calculate final price based on provided values
+          if (
+            ourValue !== undefined &&
+            ourValue !== null &&
+            !isNaN(ourValue) &&
+            ourValue !== 0
+          ) {
+            // If our portion is provided and not zero
+            selectedItemFour = priceValue; // Update displayed price
+            itemFourFinalPrice = ourValue * qtyValue; // Final price based on our portion
+            itemFourPrice = ourValue; // Our portion
+          } else {
+            // If our portion is zero or not provided
+            selectedItemFour = priceValue; // Update displayed price
+            itemFourFinalPrice = qtyValue * priceValue; // Final price based on full price
+            itemFourPrice = priceValue; // Full price
+            ehcAmount = 0;
+            ehcCheck = 0;
+          }
+
+          calculateTotal();
+          displaySelectedItems();
+        }
+
+        //-------------------------------------------------------------------------------------------------------------------
+        itemFive.addEventListener("input", function () {
+          displaySelectedItems();
+        });
+
+        qtyItemFive.addEventListener("input", function () {
+          updateItemFiveTotal();
+        });
+
+        dateFieldItemFive.addEventListener("input", function () {
+          displaySelectedItems();
+        });
+
+        priceItemFive.addEventListener("input", function () {
+          updateItemFiveTotal();
+          displaySelectedItems();
+        });
+
+        ourItemFive.addEventListener("input", function () {
+          updateItemFiveTotal();
+          displaySelectedItems();
+        });
+
+        function updateItemFiveTotal() {
+          let qtyValue = parseFloat(qtyItemFive.value);
+          let priceValue = parseFloat(priceItemFive.value);
+          let ourValue = parseFloat(ourItemFive.value);
+
+          // Check if price is inclusive of GST
+          if (priceItemFive.value.trim().toLowerCase().endsWith("g")) {
+            priceValue *= 1.05; // Assuming 5% GST
+            priceValue = Math.round((priceValue + Number.EPSILON) * 100) / 100;
+
+            ourValue *= 1.05; // Assuming 5% GST
+            ourValue = Math.round((ourValue + Number.EPSILON) * 100) / 100;
+          }
+
+          // Calculate final price based on provided values
+          if (
+            ourValue !== undefined &&
+            ourValue !== null &&
+            !isNaN(ourValue) &&
+            ourValue !== 0
+          ) {
+            // If our portion is provided and not zero
+            selectedItemFive = priceValue; // Update displayed price
+            itemFiveFinalPrice = ourValue * qtyValue; // Final price based on our portion
+            itemFivePrice = ourValue; // Our portion
+          } else {
+            // If our portion is zero or not provided
+            selectedItemFive = priceValue; // Update displayed price
+            itemFiveFinalPrice = qtyValue * priceValue; // Final price based on full price
+            itemFivePrice = priceValue; // Full price
+            ehcAmount = 0;
+            ehcCheck = 0;
+          }
+
+          calculateTotal();
+          displaySelectedItems();
+        }
+        //-------------------------------------------------------------------------------------------------------------------
+        itemSix.addEventListener("input", function () {
+          displaySelectedItems();
+        });
+
+        qtyItemSix.addEventListener("input", function () {
+          updateItemSixTotal();
+        });
+
+        dateFieldItemSix.addEventListener("input", function () {
+          displaySelectedItems();
+        });
+
+        priceItemSix.addEventListener("input", function () {
+          updateItemSixTotal();
+          displaySelectedItems();
+        });
+
+        ourItemSix.addEventListener("input", function () {
+          updateItemSixTotal();
+          displaySelectedItems();
+        });
+
+        function updateItemSixTotal() {
+          let qtyValue = parseFloat(qtyItemSix.value);
+          let priceValue = parseFloat(priceItemSix.value);
+          let ourValue = parseFloat(ourItemSix.value);
+
+          // Check if price is inclusive of GST
+          if (priceItemSix.value.trim().toLowerCase().endsWith("g")) {
+            priceValue *= 1.05; // Assuming 5% GST
+            priceValue = Math.round((priceValue + Number.EPSILON) * 100) / 100;
+
+            ourValue *= 1.05; // Assuming 5% GST
+            ourValue = Math.round((ourValue + Number.EPSILON) * 100) / 100;
+          }
+
+          // Calculate final price based on provided values
+          if (
+            ourValue !== undefined &&
+            ourValue !== null &&
+            !isNaN(ourValue) &&
+            ourValue !== 0
+          ) {
+            // If our portion is provided and not zero
+            selectedItemSix = priceValue; // Update displayed price
+            itemSixFinalPrice = ourValue * qtyValue; // Final price based on our portion
+            itemSixPrice = ourValue; // Our portion
+          } else {
+            // If our portion is zero or not provided
+            selectedItemSix = priceValue; // Update displayed price
+            itemSixFinalPrice = qtyValue * priceValue; // Final price based on full price
+            itemSixPrice = priceValue; // Full price
+            ehcAmount = 0;
+            ehcCheck = 0;
+          }
+
+          calculateTotal();
+          displaySelectedItems();
+        }
+        //-------------------------------------------------------------------------------------------------------------------
+        itemSeven.addEventListener("input", function () {
+          displaySelectedItems();
+        });
+
+        qtyItemSeven.addEventListener("input", function () {
+          updateItemSevenTotal();
+        });
+
+        dateFieldItemSeven.addEventListener("input", function () {
+          displaySelectedItems();
+        });
+
+        priceItemSeven.addEventListener("input", function () {
+          updateItemSevenTotal();
+          displaySelectedItems();
+        });
+
+        ourItemSeven.addEventListener("input", function () {
+          updateItemSevenTotal();
+          displaySelectedItems();
+        });
+
+        function updateItemSevenTotal() {
+          let qtyValue = parseFloat(qtyItemSeven.value);
+          let priceValue = parseFloat(priceItemSeven.value);
+          let ourValue = parseFloat(ourItemSeven.value);
+
+          // Check if price is inclusive of GST
+          if (priceItemSeven.value.trim().toLowerCase().endsWith("g")) {
+            priceValue *= 1.05; // Assuming 5% GST
+            priceValue = Math.round((priceValue + Number.EPSILON) * 100) / 100;
+
+            ourValue *= 1.05; // Assuming 5% GST
+            ourValue = Math.round((ourValue + Number.EPSILON) * 100) / 100;
+          }
+
+          // Calculate final price based on provided values
+          if (
+            ourValue !== undefined &&
+            ourValue !== null &&
+            !isNaN(ourValue) &&
+            ourValue !== 0
+          ) {
+            // If our portion is provided and not zero
+            selectedItemSeven = priceValue; // Update displayed price
+            itemSevenFinalPrice = ourValue * qtyValue; // Final price based on our portion
+            itemSevenPrice = ourValue; // Our portion
+          } else {
+            // If our portion is zero or not provided
+            selectedItemSeven = priceValue; // Update displayed price
+            itemSevenFinalPrice = qtyValue * priceValue; // Final price based on full price
+            itemSevenPrice = priceValue; // Full price
+            ehcAmount = 0;
+            ehcCheck = 0;
+          }
+
+          calculateTotal();
+          displaySelectedItems();
+        }
+        //-------------------------------------------------------------------------------------------------------------------
+        itemEight.addEventListener("input", function () {
+          displaySelectedItems();
+        });
+
+        qtyItemEight.addEventListener("input", function () {
+          updateItemEightTotal();
+        });
+
+        dateFieldItemEight.addEventListener("input", function () {
+          displaySelectedItems();
+        });
+
+        priceItemEight.addEventListener("input", function () {
+          updateItemEightTotal();
+          displaySelectedItems();
+        });
+
+        ourItemEight.addEventListener("input", function () {
+          updateItemEightTotal();
+          displaySelectedItems();
+        });
+
+        function updateItemEightTotal() {
+          let qtyValue = parseFloat(qtyItemEight.value);
+          let priceValue = parseFloat(priceItemEight.value);
+          let ourValue = parseFloat(ourItemEight.value);
+
+          // Check if price is inclusive of GST
+          if (priceItemEight.value.trim().toLowerCase().endsWith("g")) {
+            priceValue *= 1.05; // Assuming 5% GST
+            priceValue = Math.round((priceValue + Number.EPSILON) * 100) / 100;
+
+            ourValue *= 1.05; // Assuming 5% GST
+            ourValue = Math.round((ourValue + Number.EPSILON) * 100) / 100;
+          }
+
+          // Calculate final price based on provided values
+          if (
+            ourValue !== undefined &&
+            ourValue !== null &&
+            !isNaN(ourValue) &&
+            ourValue !== 0
+          ) {
+            // If our portion is provided and not zero
+            selectedItemEight = priceValue; // Update displayed price
+            itemEightFinalPrice = ourValue * qtyValue; // Final price based on our portion
+            itemEightPrice = ourValue; // Our portion
+          } else {
+            // If our portion is zero or not provided
+            selectedItemEight = priceValue; // Update displayed price
+            itemEightFinalPrice = qtyValue * priceValue; // Final price based on full price
+            itemEightPrice = priceValue; // Full price
+            ehcAmount = 0;
+            ehcCheck = 0;
+          }
+
+          calculateTotal();
+          displaySelectedItems();
+        }
+        //-------------------------------------------------------------------------------------------------------------------
+        itemNine.addEventListener("input", function () {
+          displaySelectedItems();
+        });
+
+        qtyItemNine.addEventListener("input", function () {
+          updateItemNineTotal();
+        });
+
+        dateFieldItemNine.addEventListener("input", function () {
+          displaySelectedItems();
+        });
+
+        priceItemNine.addEventListener("input", function () {
+          updateItemNineTotal();
+          displaySelectedItems();
+        });
+
+        ourItemNine.addEventListener("input", function () {
+          updateItemNineTotal();
+          displaySelectedItems();
+        });
+
+        function updateItemNineTotal() {
+          let qtyValue = parseFloat(qtyItemNine.value);
+          let priceValue = parseFloat(priceItemNine.value);
+          let ourValue = parseFloat(ourItemNine.value);
+
+          // Check if price is inclusive of GST
+          if (priceItemNine.value.trim().toLowerCase().endsWith("g")) {
+            priceValue *= 1.05; // Assuming 5% GST
+            priceValue = Math.round((priceValue + Number.EPSILON) * 100) / 100;
+
+            ourValue *= 1.05; // Assuming 5% GST
+            ourValue = Math.round((ourValue + Number.EPSILON) * 100) / 100;
+          }
+
+          // Calculate final price based on provided values
+          if (
+            ourValue !== undefined &&
+            ourValue !== null &&
+            !isNaN(ourValue) &&
+            ourValue !== 0
+          ) {
+            // If our portion is provided and not zero
+            selectedItemNine = priceValue; // Update displayed price
+            itemNineFinalPrice = ourValue * qtyValue; // Final price based on our portion
+            itemNinePrice = ourValue; // Our portion
+          } else {
+            // If our portion is zero or not provided
+            selectedItemNine = priceValue; // Update displayed price
+            itemNineFinalPrice = qtyValue * priceValue; // Final price based on full price
+            itemNinePrice = priceValue; // Full price
+            ehcAmount = 0;
+            ehcCheck = 0;
+          }
+
+          calculateTotal();
+          displaySelectedItems();
+        }
+        //-------------------------------------------------------------------------------------------------------------------
+        itemTen.addEventListener("input", function () {
+          displaySelectedItems();
+        });
+
+        qtyItemTen.addEventListener("input", function () {
+          updateItemTenTotal();
+        });
+
+        dateFieldItemTen.addEventListener("input", function () {
+          displaySelectedItems();
+        });
+
+        priceItemTen.addEventListener("input", function () {
+          updateItemTenTotal();
+          displaySelectedItems();
+        });
+
+        ourItemTen.addEventListener("input", function () {
+          updateItemTenTotal();
+          displaySelectedItems();
+        });
+
+        function updateItemTenTotal() {
+          let qtyValue = parseFloat(qtyItemTen.value);
+          let priceValue = parseFloat(priceItemTen.value);
+          let ourValue = parseFloat(ourItemTen.value);
+
+          // Check if price is inclusive of GST
+          if (priceItemTen.value.trim().toLowerCase().endsWith("g")) {
+            priceValue *= 1.05; // Assuming 5% GST
+            priceValue = Math.round((priceValue + Number.EPSILON) * 100) / 100;
+
+            ourValue *= 1.05; // Assuming 5% GST
+            ourValue = Math.round((ourValue + Number.EPSILON) * 100) / 100;
+          }
+
+          // Calculate final price based on provided values
+          if (
+            ourValue !== undefined &&
+            ourValue !== null &&
+            !isNaN(ourValue) &&
+            ourValue !== 0
+          ) {
+            // If our portion is provided and not zero
+            selectedItemTen = priceValue; // Update displayed price
+            itemTenFinalPrice = ourValue * qtyValue; // Final price based on our portion
+            itemTenPrice = ourValue; // Our portion
+          } else {
+            // If our portion is zero or not provided
+            selectedItemTen = priceValue; // Update displayed price
+            itemTenFinalPrice = qtyValue * priceValue; // Final price based on full price
+            itemTenPrice = priceValue; // Full price
+            ehcAmount = 0;
+            ehcCheck = 0;
+          }
+
+          calculateTotal();
+          displaySelectedItems();
+        }
+        //-------------------------------------------------------------------------------------------------------------------
+        itemEleven.addEventListener("input", function () {
+          displaySelectedItems();
+        });
+
+        qtyItemEleven.addEventListener("input", function () {
+          updateItemElevenTotal();
+        });
+
+        dateFieldItemEleven.addEventListener("input", function () {
+          displaySelectedItems();
+        });
+
+        priceItemEleven.addEventListener("input", function () {
+          updateItemElevenTotal();
+          displaySelectedItems();
+        });
+
+        ourItemEleven.addEventListener("input", function () {
+          updateItemElevenTotal();
+          displaySelectedItems();
+        });
+
+        function updateItemElevenTotal() {
+          let qtyValue = parseFloat(qtyItemEleven.value);
+          let priceValue = parseFloat(priceItemEleven.value);
+          let ourValue = parseFloat(ourItemEleven.value);
+
+          // Check if price is inclusive of GST
+          if (priceItemEleven.value.trim().toLowerCase().endsWith("g")) {
+            priceValue *= 1.05; // Assuming 5% GST
+            priceValue = Math.round((priceValue + Number.EPSILON) * 100) / 100;
+
+            ourValue *= 1.05; // Assuming 5% GST
+            ourValue = Math.round((ourValue + Number.EPSILON) * 100) / 100;
+          }
+
+          // Calculate final price based on provided values
+          if (
+            ourValue !== undefined &&
+            ourValue !== null &&
+            !isNaN(ourValue) &&
+            ourValue !== 0
+          ) {
+            // If our portion is provided and not zero
+            selectedItemEleven = priceValue; // Update displayed price
+            itemElevenFinalPrice = ourValue * qtyValue; // Final price based on our portion
+            itemElevenPrice = ourValue; // Our portion
+          } else {
+            // If our portion is zero or not provided
+            selectedItemEleven = priceValue; // Update displayed price
+            itemElevenFinalPrice = qtyValue * priceValue; // Final price based on full price
+            itemElevenPrice = priceValue; // Full price
+            ehcAmount = 0;
+            ehcCheck = 0;
+          }
+
+          calculateTotal();
+          displaySelectedItems();
+        }
+        //-------------------------------------------------------------------------------------------------------------------
+        itemTwelve.addEventListener("input", function () {
+          displaySelectedItems();
+        });
+
+        qtyItemTwelve.addEventListener("input", function () {
+          updateItemTwelveTotal();
+        });
+
+        dateFieldItemTwelve.addEventListener("input", function () {
+          displaySelectedItems();
+        });
+
+        priceItemTwelve.addEventListener("input", function () {
+          updateItemTwelveTotal();
+          displaySelectedItems();
+        });
+
+        ourItemTwelve.addEventListener("input", function () {
+          updateItemTwelveTotal();
+          displaySelectedItems();
+        });
+
+        function updateItemTwelveTotal() {
+          let qtyValue = parseFloat(qtyItemTwelve.value);
+          let priceValue = parseFloat(priceItemTwelve.value);
+          let ourValue = parseFloat(ourItemTwelve.value);
+
+          // Check if price is inclusive of GST
+          if (priceItemTwelve.value.trim().toLowerCase().endsWith("g")) {
+            priceValue *= 1.05; // Assuming 5% GST
+            priceValue = Math.round((priceValue + Number.EPSILON) * 100) / 100;
+
+            ourValue *= 1.05; // Assuming 5% GST
+            ourValue = Math.round((ourValue + Number.EPSILON) * 100) / 100;
+          }
+
+          // Calculate final price based on provided values
+          if (
+            ourValue !== undefined &&
+            ourValue !== null &&
+            !isNaN(ourValue) &&
+            ourValue !== 0
+          ) {
+            // If our portion is provided and not zero
+            selectedItemTwelve = priceValue; // Update displayed price
+            itemTwelveFinalPrice = ourValue * qtyValue; // Final price based on our portion
+            itemTwelvePrice = ourValue; // Our portion
+          } else {
+            // If our portion is zero or not provided
+            selectedItemTwelve = priceValue; // Update displayed price
+            itemTwelveFinalPrice = qtyValue * priceValue; // Final price based on full price
+            itemTwelvePrice = priceValue; // Full price
+            ehcAmount = 0;
+            ehcCheck = 0;
+          }
+
+          calculateTotal();
+          displaySelectedItems();
+        }
+        //-------------------------------------------------------------------------------------------------------------------
+        // Add a click event listener to the copy button
+        copyButton.addEventListener("click", function () {
+          // Get the selected-items container element
+          const selectedItemsContainer =
+            document.getElementById("selected-items");
+
+          // Create a range object to select the content inside the selected-items container
+          const range = document.createRange();
+          range.selectNodeContents(selectedItemsContainer);
+
+          // Create a new selection and add the range to it
+          const selection = window.getSelection();
+          selection.removeAllRanges();
+          selection.addRange(range);
+
+          // Copy the selected content as HTML with formatting to the clipboard
+          document.execCommand("copy");
+
+          // Clear the selection to avoid any unintended side effects
+          selection.removeAllRanges();
+
+          alert("Selected items copied to clipboard!");
+        });
+
+        // Initial calculation on page load
+        calculateTotal();
+      });
+    </script>
+  </body>
+</html>
